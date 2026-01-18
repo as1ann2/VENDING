@@ -1,0 +1,359 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+             xmlns:vm="clr-namespace:AvaloniaApplication.ViewModels"
+             x:Class="AvaloniaApplication.TradingMachineWindow"
+             x:DataType="vm:TradingMachineViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,*"
+          ColumnDefinitions="260,*"
+          Background="#E5E5E5">
+
+        <!-- ===== TOP WHITE BAR ===== -->
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Background="White"
+                Height="48"
+                BorderBrush="#DDD"
+                BorderThickness="0,0,0,1">
+
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text=""
+                           VerticalAlignment="Center"
+                           FontSize="16"/>
+
+                <!-- USER MENU (СПРАВА) -->
+                <Button x:Name="UserButton"
+                        Grid.Column="1"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="UserButton_Click">
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="8"
+                                VerticalAlignment="Center">
+
+                        <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                               Width="22"
+                               Height="22"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Автоматов А.А."
+                                       FontWeight="SemiBold"/>
+                            <TextBlock Text="Администратор"
+                                       FontSize="11"
+                                       Foreground="Gray"/>
+                        </StackPanel>
+
+                        <TextBlock Text="⌄"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- ===== BLACK HEADER ===== -->
+        <Border Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Background="Black"
+                Height="48">
+            <Grid ColumnDefinitions="260,*">
+                <Button Width="40"
+                        Height="40"
+                        Margin="8"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontSize="18">
+                    ☰
+                </Button>
+
+                <TextBlock Grid.Column="1"
+                           Text="ООО Торговые Автоматы"
+                           Foreground="White"
+                           FontSize="22"
+                           VerticalAlignment="Center"
+                           Margin="16,0,0,0"/>
+            </Grid>
+        </Border>
+
+        <!-- ===== LEFT MENU ===== -->
+        <Border Grid.Row="2"
+                Grid.Column="0"
+                Background="Black">
+            <StackPanel Margin="12">
+
+                <TextBlock Text="Навигация"
+                           Foreground="LightGray"
+                           FontSize="14"
+                           Margin="8,8,0,12"/>
+
+                <Button Background="Transparent"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Left"
+                        Click="Head_Click">
+                    <StackPanel Orientation="Horizontal" Height="40" Spacing="10">
+                        <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                               Width="18" Height="18"/>
+                        <TextBlock Text="Главная"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Background="Transparent"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Left"
+                        Click="Monitoring_Click">
+                    <StackPanel Orientation="Horizontal" Height="40" Spacing="10">
+                        <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                               Width="18" Height="18"/>
+                        <TextBlock Text="Монитор ТА"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <StackPanel Orientation="Horizontal" Height="40" Spacing="10">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18" Height="18"/>
+                    <TextBlock Text="Детальные отчеты ∨"
+                               Foreground="White"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Height="40" Spacing="10">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18" Height="18"/>
+                    <TextBlock Text="Учет ТМЦ ∨"
+                               Foreground="White"/>
+                </StackPanel>
+
+                <Button Background="Transparent"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Left"
+                        Click="AdminButton_Click">
+                    <StackPanel Orientation="Horizontal" Height="40" Spacing="10">
+                        <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                               Width="18" Height="18"/>
+                        <TextBlock Text="Администрирование ∨"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- ADMIN SUBMENU -->
+                <StackPanel x:Name="AdminSubMenu"
+                            IsVisible="False"
+                            Margin="28,0,0,0"
+                            Spacing="6">
+
+                    <TextBlock Text="Торговые автоматы" Foreground="LightGray"/>
+                    <TextBlock Text="Компании" Foreground="LightGray"/>
+                    <TextBlock Text="Пользователи" Foreground="LightGray"/>
+                    <TextBlock Text="Модемы" Foreground="LightGray"/>
+                    <TextBlock Text="Дополнительные" Foreground="LightGray"/>
+
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+       <!-- ===== MAIN CONTENT ===== -->
+<Border Grid.Row="2"
+        Grid.Column="1"
+        Background="#F5F6F8"
+        Padding="16">
+
+    <DockPanel LastChildFill="True">
+
+        <Grid DockPanel.Dock="Top"
+              ColumnDefinitions="*,Auto"
+              Margin="0,0,0,8">
+
+            <!-- Заголовок -->
+            <TextBlock Text="Торговые автоматы"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
+            <!-- КНОПКИ СПРАВА -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        Spacing="8">
+
+                <Button Width="32"
+                        Height="32"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ToolTip.Tip="Таблица">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18"
+                           Height="18"/>
+                </Button>
+
+                <Button Width="32"
+                        Height="32"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ToolTip.Tip="Плитка">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18"
+                           Height="18"/>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+
+    <!-- Счетчик -->
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding TotalCount, StringFormat=Всего найдено {0} шт.}"
+               Foreground="Gray"
+               FontSize="12"
+               Margin="0,0,0,12"/>
+
+    <!-- Фильтр -->
+    <Border DockPanel.Dock="Top"
+            Background="White"
+            Padding="12"
+            Margin="0,0,0,12"
+            CornerRadius="6">
+
+        <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+            <TextBlock Text="Показать"
+                       VerticalAlignment="Center"/>
+
+            <ComboBox Grid.Column="1"
+                      Width="70"
+                      ItemsSource="{Binding PageSizes}"
+                      SelectedItem="{Binding PageSize}"/>
+
+            <TextBox Grid.Column="2"
+                     Watermark="Фильтр"
+                     Text="{Binding NameFilter}"/>
+
+            <StackPanel Grid.Column="3"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                <Button Content="Добавить"/>
+                <Button Content="Экспорт"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+
+    <!-- ТАБЛИЦА (ПОСЛЕДНЯЯ!) -->
+    <Border Background="White"
+            BorderBrush="#DDD"
+            BorderThickness="1"
+            CornerRadius="6"
+            Margin="0,12,0,0">
+    </Border>
+
+
+</DockPanel>
+
+</Border>
+
+
+
+         <!-- ===== USER POPUP ===== -->
+<Border x:Name="UserPopup"
+        IsVisible="False"
+        Background="White"
+        Width="240"
+        CornerRadius="6"
+        BoxShadow="0 6 16 Gray"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Margin="0,48,16,0"
+        ZIndex="100">
+
+    <StackPanel>
+
+        <!-- ===== HEADER ===== -->
+        <Grid Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Флаг -->
+            <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                   Width="28"
+                   Height="18"
+                   VerticalAlignment="Center"/>
+
+            <!-- Имя + роль -->
+            <StackPanel Grid.Column="1" Margin="10,0">
+                <TextBlock Text="Автоматов А.А."
+                           FontWeight="SemiBold"/>
+                <TextBlock Text="Администратор"
+                           FontSize="11"
+                           Foreground="Gray"/>
+            </StackPanel>
+
+            <!-- Стрелка -->
+            <TextBlock Grid.Column="2"
+                       Text="⌃"
+                       FontSize="16"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Разделитель -->
+        <Border Height="1"
+                Background="#E0E0E0"
+                Margin="0,4"/>
+
+        <!-- ===== МЕНЮ ===== -->
+        <StackPanel Margin="6">
+
+            <!-- Мой профиль -->
+            <Button Background="Transparent"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18" Height="18"/>
+                    <TextBlock Text="Мой профиль"
+                               VerticalAlignment="Center"
+                               Foreground="#555"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Мои сессии -->
+            <Button Background="Transparent"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18" Height="18"/>
+                    <TextBlock Text="Мои сессии"
+                               VerticalAlignment="Center"
+                               Foreground="#555"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Выход -->
+            <Button Background="Transparent"
+                    BorderThickness="0"
+                    Click="Exit_Click"
+                    HorizontalContentAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="avares://AvaloniaApplication/Assets/profile.png"
+                           Width="18" Height="18"/>
+                    <TextBlock Text="Выход"
+                               VerticalAlignment="Center"
+                               Foreground="#555"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+    </StackPanel>
+</Border>
+
+    </Grid>
+</UserControl>
