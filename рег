@@ -1,0 +1,105 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AvaloniaApplication.RegistrationWindow"
+        Width="420"
+        Height="420"
+        Title="Регистрация"
+        Background="#F5F6FA">
+
+    <Grid>
+        <!-- Карточка -->
+        <Border
+            Width="320"
+            Padding="24"
+            Background="White"
+            CornerRadius="12"
+            BoxShadow="0 8 24 0 #30000000"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <StackPanel Spacing="14">
+
+                <!-- Заголовок -->
+                <TextBlock
+                    Text="Регистрация"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Foreground="#2C2C2C"
+                    HorizontalAlignment="Center"/>
+
+                <TextBlock
+                    Text="Создайте аккаунт"
+                    FontSize="13"
+                    Foreground="#7A7A7A"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,10"/>
+
+                <!-- Поля -->
+                <TextBox
+                    Name="LoginBox"
+                    Watermark="Логин"
+                    Height="38"
+                    CornerRadius="6"
+                    Background="#FAFAFA"
+                    BorderBrush="#D0D0D0"/>
+
+                <TextBox
+                    Name="PasswordBox"
+                    Watermark="Пароль"
+                    PasswordChar="•"
+                    Height="38"
+                    CornerRadius="6"
+                    Background="#FAFAFA"
+                    BorderBrush="#D0D0D0"/>
+
+                <!-- Кнопка -->
+                <Button
+                    Width="160"
+                    Height="40"
+                    Margin="0,10,0,0"
+                    Background="#4F7CFE"
+                    Foreground="White"
+                    CornerRadius="8"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="OnRegisterClick">
+
+                    <TextBlock Text="Войти"/>
+                </Button>
+
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
+
+
+
+
+
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using AvaloniaApplication;
+
+
+namespace AvaloniaApplication;
+
+
+public partial class RegistrationWindow : Window
+{
+    public RegistrationWindow()
+    {
+        InitializeComponent();
+    }
+
+
+    private void OnRegisterClick(object? sender, RoutedEventArgs e)
+    {
+// Тут можно добавить реальную проверку регистрации
+        var mainWindow = new MainWindow();
+        mainWindow.Show();
+        Close();
+    }
+}
