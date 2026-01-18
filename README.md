@@ -497,6 +497,8 @@ pm.test("If array not empty, vending machine has required fields", () => {
     }
 });
 
+АППАРАТ ПО АЙДИ 
+
 
 
 
