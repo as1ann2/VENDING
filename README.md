@@ -327,6 +327,44 @@ CREATE TABLE cash_collections (
 
 
 
+AuthController.cs
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace VendingAPI.Controllers;
+
+[ApiController]
+[Route("api/auth")]
+public class AuthController : ControllerBase
+{
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] LoginRequest request)
+    {
+        if (request.Username != "admin" || request.Password != "password")
+        {
+            return Unauthorized();
+        }
+
+        return Ok(new
+        {
+            accessToken = "fake-access-token",
+            refreshToken = "fake-refresh-token"
+        });
+    }
+}
+
+public class LoginRequest
+{
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+}
+
+
+
+
+
+
+
 
 using Microsoft.EntityFrameworkCore;
 using VendingAPI.Models;
