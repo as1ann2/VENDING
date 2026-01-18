@@ -365,7 +365,7 @@ public class LoginRequest
 
 
 
-
+________________________________________________________________________________________
 using Microsoft.EntityFrameworkCore;
 using VendingAPI.Models;
 
@@ -420,3 +420,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+____________________________________________________________________________________--
+<img width="373" height="517" alt="image" src="https://github.com/user-attachments/assets/870890a5-ff8f-431e-978b-14ea05dfdf83" />
+
+
