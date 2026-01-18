@@ -328,17 +328,23 @@ CREATE TABLE cash_collections (
 
 
 
+using Microsoft.EntityFrameworkCore;
+using VendingAPI.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// 🔹 Controllers
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
+// 🔹 Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 🔹 CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -349,8 +355,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+// 🔹 DbContext — ОБЯЗАТЕЛЬНО ДО Build()
+builder.Services.AddDbContext<VendingprofContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
+
+// 🔹 Build — ТОЛЬКО ПОСЛЕ ВСЕХ Add*
 var app = builder.Build();
 
+// 🔹 Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
