@@ -422,5 +422,84 @@ app.MapControllers();
 app.Run();
 ____________________________________________________________________________________--
 <img width="373" height="517" alt="image" src="https://github.com/user-attachments/assets/870890a5-ff8f-431e-978b-14ea05dfdf83" />
+POST Login
+
+// Debug logging
+console.log('Request URL:', pm.request.url.toString());
+console.log('Response Status:', pm.response.code);
+console.log('Response Body:', pm.response.text());
+
+// Handle responses
+if (pm.response.code === 404) {
+    pm.test('Endpoint exists', function () {
+        pm.expect.fail(
+            'Endpoint not found (404). ' +
+            'Check baseUrl and make sure /api/auth/login exists on the server.'
+        );
+    });
+} 
+else if (pm.response.code === 200) {
+
+    pm.test('Status code is 200', function () {
+        pm.response.to.have.status(200);
+    });
+
+    const json = pm.response.json();
+
+    pm.test('Response has accessToken', function () {
+        pm.expect(json).to.have.property('accessToken');
+    });
+
+    pm.test('Response has refreshToken', function () {
+        pm.expect(json).to.have.property('refreshToken');
+    });
+
+    // Store tokens in collection variables
+    pm.collectionVariables.set('accessToken', json.accessToken);
+    pm.collectionVariables.set('refreshToken', json.refreshToken);
+} 
+else {
+    pm.test('Unexpected status code', function () {
+        pm.expect.fail(
+            'Unexpected status code: ' + pm.response.code +
+            '. Expected 200 or handled 404.'
+        );
+    });
+}
+POT Refreh Token 
+
+pm.response.to.have.status(200);
+const json = pm.response.json();
+pm.expect(json).to.have.property('accessToken');
+pm.environment.set('accessToken', json.accessToken);
+
+POST Logout
+
+pm.response.to.have.status(200);
+
+GET Список аппаратов 
+
+pm.test("Status code is 200", () => {
+    pm.response.to.have.status(200);
+});
+
+const data = pm.response.json();
+
+pm.test("Response is array", () => {
+    pm.expect(data).to.be.an("array");
+});
+
+pm.test("If array not empty, vending machine has required fields", () => {
+    if (data.length > 0) {
+        pm.expect(data[0]).to.have.property("name");
+        pm.expect(data[0]).to.have.property("location");
+        pm.expect(data[0]).to.have.property("status");
+    }
+});
+
+
+
+
+
 
 
