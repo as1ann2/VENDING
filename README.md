@@ -11,6 +11,8 @@ Swashbuckle.AspNetCore.SeaggerUI
 Avalonia.Reactive 
 ReactiveUI
 
+dotnet ef dbcontext scaffold "Host=0.0.0.0;Username=postgres;Password=password;Database=DataBaseName" Npgsql.EntityFrameworkCore.PostgreSQL --output-dir <Folder where you want to generate classes
+
 dotnet add package bunit
 
 var builder = WebApplication.CreateBuilder(args);
