@@ -11,7 +11,9 @@ Swashbuckle.AspNetCore.SeaggerUI
 Avalonia.Reactive 
 ReactiveUI
 
-dotnet add package Selenium.WebDriver(/ChromeDriver)
+Install-Package Selenium.WebDriver
+Install-Package Selenium.Support
+Install-Package Selenium.WebDriver.ChromeDriver
 
 
 dotnet ef dbcontext scaffold "Host=0.0.0.0;Username=postgres;Password=password;Database=DataBaseName" Npgsql.EntityFrameworkCore.PostgreSQL --output-dir <Folder where you want to generate classes
