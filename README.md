@@ -11,6 +11,8 @@ Swashbuckle.AspNetCore.SeaggerUI
 Avalonia.Reactive 
 ReactiveUI
 
+dotnet add package bunit
+
 
 -- 1. Таблица производителей
 
