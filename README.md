@@ -1,3 +1,17 @@
+Avalonia.DataGrid 
+AspNetCore.OpenApi
+EntityFrameworkCore.Design 
+EntityFrameworkCore.Sqlite 
+EntityFrameworkCore.SqlServer 
+EntityFrameworkCore.Tools 
+VisualStudio.Web.CodeGeneration.Design 
+Npgsql.EntityFrameworkCore.PostgreSQL 
+Swashbuckle.AspNetCore.SwaggerGen 
+Swashbuckle.AspNetCore.SeaggerUI
+Avalonia.Reactive 
+ReactiveUI
+
+
 -- 1. Таблица производителей
 
 CREATE TABLE manufacturers (
